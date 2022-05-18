@@ -1,12 +1,13 @@
-from src import SimpleLinearRegression
-
 import numpy as np
 import pandas as pd
+
+from sklearn.linear_model import LinearRegression
+from src import SimpleLinearRegression
+
 
 if __name__ == '__main__':
 
     # Example of multidimensional data
-
     print("Example of Multidimensional Data")
 
     datas = pd.DataFrame({
@@ -24,8 +25,17 @@ if __name__ == '__main__':
     print(model_multi.score(x_multi, y_multi))
     print()
 
-    # Example of linear data
+    # Comparison to Scikit Linear Regression
+    models = LinearRegression()
+    models.fit(x_multi, y_multi)
+    print(models)
+    print(models.predict(x_multi))
+    print(models.score(x_multi, y_multi))
+    print(models.intercept_)
+    print(models.coef_)
+    print()
 
+    # Example of linear data
     print("Example of Linear Data")
 
     x = [3, 21, 22, 34, 54, 34, 55, 67, 89, 99]
@@ -38,3 +48,14 @@ if __name__ == '__main__':
     print(model)
     print(model.predict(x))
     print(model.score(x, y))
+    print()
+
+    # Comparison to Scikit Linear Regression
+    models_ = LinearRegression()
+    models_.fit(x, y)
+    print(models_)
+    print(models_.predict(x))
+    print(models_.score(x, y))
+    print(models_.intercept_)
+    print(models_.coef_)
+    print()

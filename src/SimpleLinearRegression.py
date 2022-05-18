@@ -11,6 +11,7 @@ class SimpleLinearRegression:
         self.y = y
         self.intercept_ = None
         self.coef_ = None
+        self.m, self.n = X.shape
 
     def __str__(self) -> str:
         res = ""
@@ -25,7 +26,6 @@ class SimpleLinearRegression:
         return self.__str__()
 
     def fit(self) -> Self:
-        self.m, self.n = self.X.shape
         ones_ = np.ones(shape=self.m).reshape(-1, 1)
         X_cont = np.concatenate((ones_, self.X), 1)
         inv_mat = np.linalg.inv(np.dot(X_cont.T, X_cont))
@@ -40,7 +40,10 @@ class SimpleLinearRegression:
             X = self.X
         return X.dot(self.coef_) + self.intercept_
 
-    def score(self, X: Union[np.ndarray, None] = None, y: Union[npt.ArrayLike, None] = None) -> float:
+    def score(
+        self, X: Union[np.ndarray, None] = None,
+        y: Union[npt.ArrayLike, None] = None
+    ) -> float:
         if X is None:
             X = self.X
         if y is None:
@@ -48,4 +51,4 @@ class SimpleLinearRegression:
         y_pred = self.predict(X)
         sum_numerator = np.sum(np.square(y - y_pred))
         sum_denumerator = np.sum(np.square(y - np.mean(y)))
-        return (1-(sum_numerator/sum_denumerator))
+        return 1 - (sum_numerator/sum_denumerator)
