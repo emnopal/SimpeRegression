@@ -1,4 +1,4 @@
-from Regression.SimpleRegression import SimpleLinearRegression
+from src import SimpleLinearRegression
 
 import numpy as np
 import pandas as pd
@@ -10,15 +10,15 @@ if __name__ == '__main__':
     print("Example of Multidimensional Data")
 
     datas = pd.DataFrame({
-            'one': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-            'two': [2, 5, 6, 9, 10, 11, 17, 21, 32, 41],
-            'three': [3, 5, 12, 17, 21, 48, 57, 69, 72, 81]
+        'one': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        'two': [2, 5, 6, 9, 10, 11, 17, 21, 32, 41],
+        'three': [3, 5, 12, 17, 21, 48, 57, 69, 72, 81]
     })
     x_multi = datas.drop(['one'], axis=1).values
     y_multi = datas['one'].values
 
-    model_multi = SimpleLinearRegression()
-    model_multi.fit(x_multi, y_multi)
+    model_multi = SimpleLinearRegression(x_multi, y_multi)
+    model_multi.fit()
     print(model_multi)
     print(model_multi.predict(x_multi))
     print(model_multi.score(x_multi, y_multi))
@@ -33,8 +33,8 @@ if __name__ == '__main__':
     y = [1, 10, 14, 34, 44, 48, 57, 67, 79, 90]
     y = np.array(y)
 
-    model = SimpleLinearRegression()
-    model.fit(x, y)
+    model = SimpleLinearRegression(x, y)
+    model.fit()
     print(model)
     print(model.predict(x))
     print(model.score(x, y))
